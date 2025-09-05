@@ -84,6 +84,26 @@
     small{ font-weight:600 }
 
     :root{ scroll-behavior:smooth; }
+    /* 🔒 Stop orizzontale OVUNQUE */
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+
+    /* La griglia non deve mai “allargarsi” oltre lo schermo */
+    .wrap { width: 100vw; max-width: 100vw; }
+
+    /* Il contenitore destro non può generare overflow (bug classico dei grid items) */
+    .content { min-width: 0; overflow-x: clip; }
+
+    /* Le colonne interne non possono superare il contenitore */
+    @media (min-width: 720px) {
+      .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    }
+
+    /* Testi lunghi o URL che sforano vengono spezzati */
+    .brand h1, .lead, .card p { overflow-wrap: anywhere; word-break: break-word; }
+
+    /* Bottoni: nessuna “spinta” che può creare scroll orizzontale */
+    .tab { will-change: transform; }
+    .tab:hover { transform: translate(-2px, -2px); /* ok */ }
   </style>
 </head>
 <body>
