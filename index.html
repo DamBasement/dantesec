@@ -25,21 +25,8 @@
     .wrap{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}
     .container{width:min(1080px, 92vw);margin:0 auto;padding-inline:clamp(18px,4.5vw,36px)}
 
-    header{
-      border-bottom:8px solid var(--black);
-      /* Symmetric left & right bars + bottom band */
-      background:
-        linear-gradient(90deg,
-          var(--black) 0 24px,
-          transparent 24px calc(100% - 24px),
-          var(--black) calc(100% - 24px) 100%),
-        linear-gradient(0deg,
-          transparent calc(100% - 24px),
-          var(--black) 0);
-      background-size:100% 100%, 100% 64px;
-      background-repeat:no-repeat;
-    }
-    .hero{display:flex;flex-direction:column;gap:28px;align-items:stretch;padding:48px 0;max-width:100%}
+    header{border-bottom:8px solid var(--black);background:var(--paper)}
+    .hero{display:flex;flex-direction:column;gap:28px;align-items:stretch;padding:48px 0;width:100%;max-width:100%}
 
     .brand{display:flex;flex-direction:column;gap:12px;max-width:100%;background:var(--card);border:6px solid var(--black);padding:clamp(12px,2.5vw,18px)}
     .brand h1{margin:0;font-weight:900;letter-spacing:0.5px;line-height:1.15;text-transform:uppercase;font-size:clamp(24px,4vw,42px);overflow-wrap:anywhere;word-break:break-word}
