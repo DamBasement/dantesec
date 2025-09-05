@@ -1,144 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Damiano "Dante" Bassani</title>
+  <title>DanteSec — Escher Preview</title>
+  <meta name="theme-color" content="#000000" />
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: monospace;
-      background: #e6e6e6;
-      color: #000;
+    :root{
+      --ink:#000;
+      --paper:#e6e6e6;
+      --stone:#cfcfcf;
+      --white:#ffffff;
+    }
+    html, body { margin:0; padding:0; background:var(--paper); color:var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      min-height:100%;
+    }
+    body, .frame, .banner, .grid, .card { position: relative; z-index: 0; }
+
+    .bg-iso, .bg-grain { position: fixed; inset: 0; pointer-events:none; }
+    .bg-iso { z-index: -2; opacity: .25;
+      background:
+        linear-gradient(30deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
+        linear-gradient(150deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
+        linear-gradient(90deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
+        linear-gradient(30deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px,
+        linear-gradient(150deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px,
+        linear-gradient(90deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px;
+      mix-blend-mode:multiply;
+    }
+    .bg-grain { z-index: -1; opacity:.12;
+      background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode:multiply;
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      padding: 5vw;
-      background: #c0c0c0;
-      border: 10px solid #000;
-      box-sizing: border-box;
+    .frame { min-height: 100vh; box-sizing: border-box; padding: 5vw; background:var(--stone);
+      border: 10px solid var(--ink);
+    }
+    .banner h1 { margin:0; padding:20px 24px; background:var(--white); border:6px double var(--ink);
+      text-transform:uppercase; font-size: clamp(1.8rem, 3.2vw, 3rem); box-shadow:-8px 8px 0 var(--ink);
+    }
+    .subtitle{ font-size: .95rem; margin: 28px 0 0; padding:16px 20px; background:var(--white);
+      border-left: 15px solid var(--ink); border-right:15px solid var(--ink);
+      font-weight:700; box-shadow: inset -4px 0 0 var(--ink);
     }
 
-    .title {
-      font-size: 2.5rem;
-      margin: 0;
-      padding: 20px;
-      background: #fff;
-      border: 6px double #000;
-      text-transform: uppercase;
-      box-shadow: -8px 8px 0 #000;
-    }
+    .grid { display:grid; gap:28px; margin-top:40px; grid-template-columns: repeat(12, 1fr); }
+    .card{ grid-column: span 12; background: var(--white); padding:24px; border:5px solid var(--ink);
+      box-shadow:10px 10px 0 var(--ink); }
+    .card h2{ margin:0 0 12px 0; font-size:1.05rem; text-decoration:underline; text-transform:uppercase; }
+    .card p{ margin:0; line-height:1.6; font-size:.95rem; }
+    a { color: var(--ink); font-weight:700; text-decoration: underline; background:#eaeaea; padding:2px 4px; border:2px solid var(--ink); }
 
-    .subtitle {
-      font-size: 1rem;
-      margin: 30px 0;
-      padding: 20px;
-      background: #fff;
-      border-left: 15px solid #000;
-      border-right: 15px solid #000;
-      font-weight: bold;
-      box-shadow: inset -4px 0 0 #000;
+    .footer{ margin-top:64px; text-align:right; font-size:.9rem; background:var(--white);
+      padding:15px; border-top:4px solid var(--ink); box-shadow: inset 0 4px 0 var(--ink);
+      text-transform:uppercase;
     }
-
-    .section {
-      margin-top: 40px;
-      background: #fff;
-      padding: 25px;
-      border: 5px solid #000;
-      box-shadow: 10px 10px 0 #000;
-    }
-
-    .section h2 {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      text-decoration: underline;
-      text-transform: uppercase;
-    }
-
-    .section p {
-      margin: 0;
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    .section a {
-      color: #000;
-      font-weight: bold;
-      text-decoration: underline;
-      background: #eaeaea;
-      padding: 2px 4px;
-      border: 2px solid #000;
-    }
-
-    .logo {
-      margin-top: 80px;
-      text-align: right;
-      font-size: 0.9rem;
-      background: #fff;
-      padding: 15px;
-      border-top: 4px solid #000;
-      text-transform: uppercase;
-      box-shadow: inset 0 4px 0 #000;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 20px;
-        border-width: 6px;
-      }
-      .title {
-        font-size: 2rem;
-        padding: 15px;
-      }
-      .subtitle {
-        font-size: 0.95rem;
-        padding: 15px;
-      }
-      .section {
-        padding: 20px;
-      }
-      .section h2 {
-        font-size: 1rem;
-      }
-      .section p {
-        font-size: 0.9rem;
-      }
-      .logo {
-        font-size: 0.8rem;
-        padding: 10px;
-      }
-    }
+    @media (min-width: 720px){ .card{ grid-column: span 6; } }
+    @media (min-width: 1120px){ .card{ grid-column: span 4; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div>
-      <h1 class="title">Damiano "Dante" Bassani</h1>
-      <p class="subtitle">Purple & Zero Trust: attacker-informed, defender-aligned. No gradients, no fluff.</p>
+  <div class="bg-iso"></div>
+  <div class="bg-grain"></div>
 
-      <div class="section">
+  <main class="frame">
+    <header class="banner">
+      <h1>Damiano "Dante" Bassani</h1>
+      <p class="subtitle">Purple & Zero Trust — attacker-informed, defender-aligned. No gradients. No fluff.</p>
+    </header>
+
+    <section class="grid">
+      <article class="card">
         <h2>[about.md]</h2>
-        <p>Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, Always.</p>
-      </div>
-
-      <div class="section">
+        <p>Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, always.</p>
+      </article>
+      <article class="card">
         <h2>[projects/]</h2>
-        <p>Threat modeling & adversary behavior frameworks. <span style="color: purple;"font-weight:700">Purple.</span> Brutalist. Romanesco.</p>
-      </div>
-
-      <div class="section">
+        <p>Threat modeling & adversary behavior frameworks. <span style="color: purple; font-weight:700">Purple.</span> Brutalist. Romanesco.</p>
+      </article>
+      <article class="card">
         <h2>[contact.sh]</h2>
-        <p>Ping: <a href="https://www.linkedin.com/in/damiano-bassani-65965b266/"
-   target="_blank" rel="noopener noreferrer">linkedin</a>. 
-          Git repo: <a href="https://github.com/DamBasement/DamBasement" target="_blank" rel="noopener noreferrer">Git</a>.
-          No PGP, no excuses.</p>
-      </div>
-    </div>
-  </div>
+        <p>
+          Ping: <a href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank">linkedin</a> ·
+          Git: <a href="https://github.com/DamBasement/DamBasement" target="_blank">repo</a> ·
+          No PGP, no excuses.
+        </p>
+      </article>
+    </section>
+
+    <footer class="footer">DanteSec — Brutalist security pages · v1.0</footer>
+  </main>
 </body>
 </html>
