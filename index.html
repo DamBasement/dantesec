@@ -13,6 +13,7 @@
       --blue:#1f6feb;
       --yellow:#ffd200;
       --black:#000;
+      --card:#ffffff;        /* sfondo elementi */
       --grid: 12;            /* colonne responsive */
     }
 
@@ -25,19 +26,20 @@
 
     /* GRIGLIA BAUHAUS */
     .wrap{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}
-    .container{width:min(1080px, 92vw);margin:0 auto}
+    .container{width:min(1080px, 92vw);margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
 
     /* HEADER con righe e forme geometriche */
     header{border-bottom:8px solid var(--black);background:linear-gradient(90deg,var(--black) 0 24px, transparent 24px),
             linear-gradient(0deg, transparent calc(100% - 24px), var(--black) 0);
             background-size:64px 100%, 100% 64px; background-repeat:no-repeat}
-    .hero{display:grid;grid-template-columns: 1fr 240px;gap:32px;align-items:center;padding:48px 0}
+    .hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding:48px 0}
+@media(min-width:880px){.hero{grid-template-columns:1fr auto;gap:40px}}
     .brand{
       display:flex;flex-direction:column;gap:12px
     }
     .brand h1{margin:0;font-weight:900;letter-spacing:0.5px;line-height:1; text-transform:uppercase;
-      font-size:clamp(28px,6vw,56px)}
-    .brand p{margin:0;max-width:60ch;font-size:clamp(14px,2.2vw,18px)}
+  font-size:clamp(28px,5.2vw,56px)}
+    .brand p{margin:0;max-width:62ch;font-size:clamp(14px,2vw,18px)}
 
     /* badge colorati stile bauhaus */
     .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
@@ -47,11 +49,13 @@
     .b-yellow{background:var(--yellow)}
 
     /* blocco forme geometrice (SVG) */
-    .geo{aspect-ratio:1/1;border:8px solid var(--black);position:relative;isolation:isolate;background:#fff}
+    .logo{width:clamp(160px,28vw,300px);aspect-ratio:1/1;border:8px solid var(--black);position:relative;isolation:isolate;background:var(--card);justify-self:end;justify-self:end}
+@media(max-width:879px){.logo{justify-self:start;width:clamp(140px,42vw,260px)}}
+.logo svg{position:absolute;inset:0;height:100%;width:100%}
     .geo svg{position:absolute;inset:0}
 
     /* SECTIONS */
-    .section{padding:48px 0;border-bottom:8px solid var(--black)}
+    .section{padding:56px 0;border-bottom:8px solid var(--black)}
     .section:last-of-type{border-bottom:none}
     .section h2{margin:0 0 18px 0;font-size:clamp(16px,3vw,22px);text-transform:uppercase;letter-spacing:.5px}
     .section p{margin:0;max-width:70ch;line-height:1.6}
@@ -59,7 +63,7 @@
     /* GRID CARDS */
     .grid{display:grid;gap:22px}
     @media(min-width:720px){ .grid{grid-template-columns:repeat(12,1fr)} }
-    .card{background:#fff;border:6px solid var(--black);padding:18px;min-height:120px;display:flex;flex-direction:column;gap:8px}
+    .card{background:var(--card);border:6px solid var(--black);padding:18px;min-height:120px;display:flex;flex-direction:column;gap:8px}
     .card h3{margin:0;text-transform:uppercase;font-size:14px;letter-spacing:.4px}
     .card p{margin:0}
 
@@ -70,7 +74,7 @@
 
     /* link come bottoni tipografici */
     .linkbar{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .btn{display:inline-block;border:4px solid var(--black);padding:8px 12px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;background:#fff}
+    .btn{display:inline-block;border:4px solid var(--black);padding:8px 12px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;background:var(--card)}
     .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
 
     /* FOOTER */
@@ -82,9 +86,24 @@
 
     /* ACCESSIBILITÀ */
     @media (prefers-reduced-motion: reduce){ .btn{transition:none} }
-  </style>
+      /* THEME TOGGLE (manual) */
+  :root{ /* light (default) */ }
+  [data-theme="dark"]{
+    --paper:#0f0f10;
+    --ink:#f5f5f5;
+    --black:#f5f5f5;
+    --red:#ff4a54;
+    --blue:#7ab0ff;
+    --yellow:#ffd84d;
+    --card:#151516;
+  }
+  .toggle-theme{position:fixed; right:16px; top:16px; z-index:20; border:4px solid var(--black); background:var(--card); color:var(--ink); padding:8px 10px; font-weight:900; text-transform:uppercase; letter-spacing:.6px; cursor:pointer}
+  .toggle-theme:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--black)}
+</style>
 </head>
 <body>
+  <button class="toggle-theme" id="themeToggle" aria-label="Toggle theme">Dark</button>
+  <div class="toggle-theme"><button onclick="document.body.classList.toggle('dark-mode')">Toggle Theme</button></div>
   <div class="wrap">
     <header>
       <div class="container hero">
@@ -97,19 +116,7 @@
             <span class="badge b-yellow">Systems</span>
           </div>
         </div>
-        <figure class="geo" aria-hidden="true">
-          <!-- Geometrie primarie in stile Bauhaus -->
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
-            <title>Geometrie Bauhaus</title>
-            <rect x="0" y="0" width="100" height="100" fill="#fff"/>
-            <rect x="6" y="6" width="88" height="88" fill="none" stroke="#000" stroke-width="3"/>
-            <circle cx="32" cy="32" r="20" fill="#e01e37" stroke="#000" stroke-width="3"/>
-            <rect x="52" y="16" width="30" height="30" fill="#1f6feb" stroke="#0b3b91" stroke-width="3"/>
-            <polygon points="22,78 78,78 50,52" fill="#ffd200" stroke="#000" stroke-width="3"/>
-            <line x1="6" y1="50" x2="94" y2="50" stroke="#000" stroke-width="3"/>
-            <line x1="50" y1="6" x2="50" y2="94" stroke="#000" stroke-width="3"/>
-          </svg>
-        </figure>
+        
       </div>
     </header>
 
@@ -171,5 +178,25 @@
       </div>
     </footer>
   </div>
+  <script>
+    (function(){
+      const btn = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      // init from localStorage or system preference
+      const saved = localStorage.getItem('theme');
+      if(saved){ root.setAttribute('data-theme', saved); }
+      else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+        root.setAttribute('data-theme','dark');
+      }
+      const isDark = () => root.getAttribute('data-theme') === 'dark';
+      const setLabel = () => btn.textContent = isDark() ? 'Light' : 'Dark';
+      setLabel();
+      btn.addEventListener('click', ()=>{
+        root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+        localStorage.setItem('theme', root.getAttribute('data-theme'));
+        setLabel();
+      });
+    })();
+  </script>
 </body>
 </html>
