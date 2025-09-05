@@ -43,10 +43,12 @@
 
     .brand{display:flex;flex-direction:column;gap:12px;max-width:100%}
     .brand h1{margin:0;font-weight:900;letter-spacing:0.5px;line-height:1.2;text-transform:uppercase;font-size:clamp(24px,4vw,42px)}
-.brand h1 .fullname{display:inline}
-.brand h1 .shortname{display:none}
-@media(max-width:600px){
-  .brand h1 .fullname{display:none}
+.brand .fullname{display:inline}
+.brand .shortname{display:none}
+@media (max-width:820px){
+  .brand .fullname{display:none}
+  .brand .shortname{display:inline}
+}
   .brand h1 .shortname{display:inline}
 }
     .brand p{margin:0;max-width:66ch;font-size:clamp(14px,1.8vw,18px);line-height:1.6}
