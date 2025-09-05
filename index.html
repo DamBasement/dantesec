@@ -3,60 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Damiano "Dante" Bassani · Bauhaus Poster (Clean)</title>
+  <title>Damiano Dante Bassani · Bauhaus Poster</title>
   <meta name="theme-color" content="#000000" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
       --ink:#111; --paper:#f7f7f5; --card:#fff; --black:#000;
       --red:#e01e37; --blue:#1f6feb; --yellow:#ffd200;
     }
 
-    /* reset essenziale */
+    /* reset */
     *,*:before,*:after{box-sizing:border-box}
     html,body{height:100%;margin:0;width:100%;max-width:100%;overflow-x:hidden}
     body{
       background:var(--paper);color:var(--ink);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial
+      font-family:'Montserrat', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
 
-    /* layout: 2 colonne desktop, 1 mobile */
     .wrap{
       min-height:100svh;
       display:grid;
       grid-template-columns:300px 1fr;
-      width:100%;
-      max-width:100%;
+      width:100%;max-width:100%;
     }
     @media (max-width:900px){
       .wrap{grid-template-columns:1fr}
     }
 
-    /* rail sinistro (semplice, senza sticky) */
     .rail{
       border-right:8px solid var(--black);
       padding:32px 24px 40px;
       background:var(--paper);
       display:flex;flex-direction:column;gap:18px;
-      width:100%;max-width:100%;
     }
     @media (max-width:900px){
       .rail{border-right:none;border-bottom:8px solid var(--black);padding:20px 18px}
     }
 
     .brand h1{
-      margin:0;text-transform:uppercase;font-weight:900;letter-spacing:.5px;
-      font-size:clamp(28px,4vw,48px);line-height:1.12;
+      margin:0;
+      font-family:'Bebas Neue', sans-serif;
+      text-transform:uppercase;
+      font-weight:400;
+      font-size:clamp(32px,5vw,56px);
+      line-height:1.1;
       word-break:break-word;overflow-wrap:anywhere;
+      letter-spacing:1px;
     }
-    .brand p{margin:6px 0 0;max-width:34ch;line-height:1.55}
+    .brand p{
+      margin:6px 0 0;
+      max-width:34ch;
+      line-height:1.55;
+      font-weight:500;
+    }
 
     .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
     .tab{
       display:inline-block;border:4px solid var(--black);padding:8px 10px;
-      font-weight:900;text-transform:uppercase;letter-spacing:.5px;background:var(--card);
-      will-change:transform;
+      font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:var(--card);
     }
     .tab:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
 
@@ -64,19 +71,20 @@
     .dot{width:14px;height:14px;border:3px solid var(--black);border-radius:50%}
     .dot.r{background:var(--red)} .dot.b{background:var(--blue)} .dot.y{background:var(--yellow)}
 
-    /* colonna destra */
-    .content{
-      min-width:0;display:flex;flex-direction:column;
-      width:100%;max-width:100%;overflow-x:clip;
-    }
+    .content{min-width:0;display:flex;flex-direction:column;width:100%;max-width:100%;overflow-x:clip}
     .container{width:min(1120px,92vw);margin:0 auto;padding:clamp(18px,4vw,32px)}
 
     .section{padding:32px 0;border-bottom:8px solid var(--black)}
     .section:last-of-type{border-bottom:none}
-    .section h2{margin:0 0 16px;font-size:14px;text-transform:uppercase;letter-spacing:.5px}
-    .lead{margin:0 0 16px;max-width:72ch;line-height:1.7;overflow-wrap:anywhere;word-break:break-word}
+    .section h2{
+      margin:0 0 16px;
+      font-family:'Bebas Neue', sans-serif;
+      font-size:20px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+    .lead{margin:0 0 16px;max-width:72ch;line-height:1.7;overflow-wrap:anywhere}
 
-    /* griglia carte */
     .grid{display:grid;gap:18px;width:100%;max-width:100%}
     @media (min-width:720px){
       .grid{grid-template-columns:repeat(12,minmax(0,1fr))}
@@ -86,8 +94,15 @@
       background:var(--card);border:6px solid var(--black);padding:18px;
       display:flex;flex-direction:column;gap:6px;min-height:120px;width:100%;
     }
-    .card h3{margin:0;text-transform:uppercase;font:700 14px/1 ui-sans-serif;overflow-wrap:anywhere}
-    .card p{margin:0;overflow-wrap:anywhere;word-break:break-word}
+    .card h3{
+      margin:0;
+      font-family:'Bebas Neue', sans-serif;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+    .card p{margin:0;font-weight:500}
+
     .accent-red{border-left:18px solid var(--red)}
     .accent-blue{border-left:18px solid var(--blue)}
     .accent-yellow{border-left:18px solid var(--yellow)}
@@ -96,6 +111,7 @@
       padding:20px 24px;border-top:8px solid var(--black);
       display:flex;justify-content:space-between;align-items:center;
       width:100%;max-width:100%;
+      font-family:'Montserrat',sans-serif;
     }
     small{font-weight:600}
   </style>
@@ -104,7 +120,7 @@
   <div class="wrap">
     <aside class="rail">
       <div class="brand">
-        <h1>Damiano "Dante" Bassani</h1>
+        <h1>Damiano Dante Bassani</h1>
         <p>Security consultant · Purple & Zero Trust. Attacker-informed, defender-aligned. Brutalist craft, Bauhaus grid.</p>
       </div>
       <nav class="tabs">
@@ -114,9 +130,7 @@
         <a class="tab" href="https://github.com/DamBasement/DamBasement" target="_blank" rel="noopener">github</a>
         <a class="tab" href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank" rel="noopener">linkedin</a>
       </nav>
-      <div class="dots" aria-hidden="true">
-        <span class="dot r"></span><span class="dot b"></span><span class="dot y"></span>
-      </div>
+      <div class="dots"><span class="dot r"></span><span class="dot b"></span><span class="dot y"></span></div>
     </aside>
 
     <main class="content">
@@ -131,11 +145,11 @@
           <div class="grid">
             <article class="card accent-red" style="grid-column:span 12;">
               <h3>Cert path</h3>
-      <p>Burp Suite Certified Practitioner as the immediate milestone, building toward OSWE. Focused on web exploitation, bypasses, and writing reliable proof-of-concepts.</p>
+              <p>Burp Suite Certified Practitioner as the immediate milestone, building toward OSWE. Focused on web exploitation, bypasses, and writing reliable proof-of-concepts.</p>
             </article>
             <article class="card accent-blue" style="grid-column:span 12;">
               <h3>Skate log</h3>
-      <p>Goal: land clean kickflips and get strong with shovits. Short but consistent sessions, progress tracked like a war room: practice, slams, and a trick checklist.</p>
+              <p>Goal: land clean kickflips and get strong with shovits. Short but consistent sessions, progress tracked like a war room: practice, slams, and a trick checklist.</p>
             </article>
             <article class="card accent-yellow" style="grid-column:span 12;">
               <h3>Privacy-first</h3>
@@ -161,7 +175,7 @@
       </div>
 
       <footer>
-        <small>© Bauhaus poster · clean</small>
+        <small>© Bauhaus poster · with Montserrat & Bebas Neue</small>
         <div class="dots"><span class="dot r"></span><span class="dot b"></span><span class="dot y"></span></div>
       </footer>
     </main>
