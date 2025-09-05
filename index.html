@@ -1,96 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DanteSec — Escher Preview</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DanteSec · Bauhaus</title>
   <meta name="theme-color" content="#000000" />
   <style>
     :root{
-      --ink:#000;
-      --paper:#e6e6e6;
-      --stone:#cfcfcf;
-      --white:#ffffff;
-    }
-    html, body { margin:0; padding:0; background:var(--paper); color:var(--ink);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      min-height:100%;
-    }
-    body, .frame, .banner, .grid, .card { position: relative; z-index: 0; }
-
-    .bg-iso, .bg-grain { position: fixed; inset: 0; pointer-events:none; }
-    .bg-iso { z-index: -2; opacity: .25;
-      background:
-        linear-gradient(30deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
-        linear-gradient(150deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
-        linear-gradient(90deg, var(--ink) 12%, transparent 12.5%) 0 0/60px 104px,
-        linear-gradient(30deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px,
-        linear-gradient(150deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px,
-        linear-gradient(90deg, var(--ink) 12%, transparent 12.5%) 30px 52px/60px 104px;
-      mix-blend-mode:multiply;
-    }
-    .bg-grain { z-index: -1; opacity:.12;
-      background-image: radial-gradient(var(--ink) 1px, transparent 1px);
-      background-size: 3px 3px;
-      mix-blend-mode:multiply;
+      --ink:#111;            /* quasi-nero per testo */
+      --paper:#f7f7f5;       /* carta calda */
+      --red:#e01e37;         /* primari bauhaus */
+      --blue:#1f6feb;
+      --yellow:#ffd200;
+      --black:#000;
+      --grid: 12;            /* colonne responsive */
     }
 
-    .frame { min-height: 100vh; box-sizing: border-box; padding: 5vw; background:var(--stone);
-      border: 10px solid var(--ink);
-    }
-    .banner h1 { margin:0; padding:20px 24px; background:var(--white); border:6px double var(--ink);
-      text-transform:uppercase; font-size: clamp(1.8rem, 3.2vw, 3rem); box-shadow:-8px 8px 0 var(--ink);
-    }
-    .subtitle{ font-size: .95rem; margin: 28px 0 0; padding:16px 20px; background:var(--white);
-      border-left: 15px solid var(--ink); border-right:15px solid var(--ink);
-      font-weight:700; box-shadow: inset -4px 0 0 var(--ink);
-    }
+    /* RESET MINIMO */
+    *,*:before,*:after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    img{max-width:100%;display:block}
+    a{color:inherit}
 
-    .grid { display:grid; gap:28px; margin-top:40px; grid-template-columns: repeat(12, 1fr); }
-    .card{ grid-column: span 12; background: var(--white); padding:24px; border:5px solid var(--ink);
-      box-shadow:10px 10px 0 var(--ink); }
-    .card h2{ margin:0 0 12px 0; font-size:1.05rem; text-decoration:underline; text-transform:uppercase; }
-    .card p{ margin:0; line-height:1.6; font-size:.95rem; }
-    a { color: var(--ink); font-weight:700; text-decoration: underline; background:#eaeaea; padding:2px 4px; border:2px solid var(--ink); }
+    /* GRIGLIA BAUHAUS */
+    .wrap{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}
+    .container{width:min(1080px, 92vw);margin:0 auto}
 
-    .footer{ margin-top:64px; text-align:right; font-size:.9rem; background:var(--white);
-      padding:15px; border-top:4px solid var(--ink); box-shadow: inset 0 4px 0 var(--ink);
-      text-transform:uppercase;
+    /* HEADER con righe e forme geometriche */
+    header{border-bottom:8px solid var(--black);background:linear-gradient(90deg,var(--black) 0 24px, transparent 24px),
+            linear-gradient(0deg, transparent calc(100% - 24px), var(--black) 0);
+            background-size:64px 100%, 100% 64px; background-repeat:no-repeat}
+    .hero{display:grid;grid-template-columns: 1fr 240px;gap:32px;align-items:center;padding:48px 0}
+    .brand{
+      display:flex;flex-direction:column;gap:12px
     }
-    @media (min-width: 720px){ .card{ grid-column: span 6; } }
-    @media (min-width: 1120px){ .card{ grid-column: span 4; } }
+    .brand h1{margin:0;font-weight:900;letter-spacing:0.5px;line-height:1; text-transform:uppercase;
+      font-size:clamp(28px,6vw,56px)}
+    .brand p{margin:0;max-width:60ch;font-size:clamp(14px,2.2vw,18px)}
+
+    /* badge colorati stile bauhaus */
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .badge{font-weight:800;border:3px solid var(--black);padding:4px 10px;text-transform:uppercase;letter-spacing:.5px}
+    .b-red{background:var(--red)}
+    .b-blue{background:var(--blue);color:#fff;border-color:#0b3b91}
+    .b-yellow{background:var(--yellow)}
+
+    /* blocco forme geometrice (SVG) */
+    .geo{aspect-ratio:1/1;border:8px solid var(--black);position:relative;isolation:isolate;background:#fff}
+    .geo svg{position:absolute;inset:0}
+
+    /* SECTIONS */
+    .section{padding:48px 0;border-bottom:8px solid var(--black)}
+    .section:last-of-type{border-bottom:none}
+    .section h2{margin:0 0 18px 0;font-size:clamp(16px,3vw,22px);text-transform:uppercase;letter-spacing:.5px}
+    .section p{margin:0;max-width:70ch;line-height:1.6}
+
+    /* GRID CARDS */
+    .grid{display:grid;gap:22px}
+    @media(min-width:720px){ .grid{grid-template-columns:repeat(12,1fr)} }
+    .card{background:#fff;border:6px solid var(--black);padding:18px;min-height:120px;display:flex;flex-direction:column;gap:8px}
+    .card h3{margin:0;text-transform:uppercase;font-size:14px;letter-spacing:.4px}
+    .card p{margin:0}
+
+    /* accenti colorati bordo sinistro */
+    .accent-red{border-left:18px solid var(--red)}
+    .accent-blue{border-left:18px solid var(--blue)}
+    .accent-yellow{border-left:18px solid var(--yellow)}
+
+    /* link come bottoni tipografici */
+    .linkbar{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .btn{display:inline-block;border:4px solid var(--black);padding:8px 12px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;background:#fff}
+    .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
+
+    /* FOOTER */
+    footer{padding:20px 0;border-top:8px solid var(--black)}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .mark{display:flex;gap:8px;align-items:center}
+    .dot{width:14px;height:14px;border:3px solid var(--black);border-radius:50%}
+    .dot.r{background:var(--red)}.dot.b{background:var(--blue)}.dot.y{background:var(--yellow)}
+
+    /* ACCESSIBILITÀ */
+    @media (prefers-reduced-motion: reduce){ .btn{transition:none} }
   </style>
 </head>
 <body>
-  <div class="bg-iso"></div>
-  <div class="bg-grain"></div>
-
-  <main class="frame">
-    <header class="banner">
-      <h1>Damiano "Dante" Bassani</h1>
-      <p class="subtitle">Purple & Zero Trust — attacker-informed, defender-aligned. No gradients. No fluff.</p>
+  <div class="wrap">
+    <header>
+      <div class="container hero">
+        <div class="brand">
+          <h1>DanteSec — Damiano “Dante” Bassani</h1>
+          <p>Security consultant · Purple & Zero Trust. Attacker‑informed, defender‑aligned. Brutalist craft, Bauhaus grid. No gradients. No fluff.</p>
+          <div class="badges">
+            <span class="badge b-red">Purple</span>
+            <span class="badge b-blue">Zero Trust</span>
+            <span class="badge b-yellow">Systems</span>
+          </div>
+        </div>
+        <figure class="geo" aria-hidden="true">
+          <!-- Geometrie primarie in stile Bauhaus -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
+            <title>Geometrie Bauhaus</title>
+            <rect x="0" y="0" width="100" height="100" fill="#fff"/>
+            <rect x="6" y="6" width="88" height="88" fill="none" stroke="#000" stroke-width="3"/>
+            <circle cx="32" cy="32" r="20" fill="#e01e37" stroke="#000" stroke-width="3"/>
+            <rect x="52" y="16" width="30" height="30" fill="#1f6feb" stroke="#0b3b91" stroke-width="3"/>
+            <polygon points="22,78 78,78 50,52" fill="#ffd200" stroke="#000" stroke-width="3"/>
+            <line x1="6" y1="50" x2="94" y2="50" stroke="#000" stroke-width="3"/>
+            <line x1="50" y1="6" x2="50" y2="94" stroke="#000" stroke-width="3"/>
+          </svg>
+        </figure>
+      </div>
     </header>
 
-    <section class="grid">
-      <article class="card">
+    <main>
+      <section class="section container">
         <h2>[about.md]</h2>
-        <p>Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, always.</p>
-      </article>
-      <article class="card">
-        <h2>[projects/]</h2>
-        <p>Threat modeling & adversary behavior frameworks. <span style="color: purple; font-weight:700">Purple.</span> Brutalist. Romanesco.</p>
-      </article>
-      <article class="card">
-        <h2>[contact.sh]</h2>
-        <p>
-          Ping: <a href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank">linkedin</a> ·
-          Git: <a href="https://github.com/DamBasement/DamBasement" target="_blank">repo</a> ·
-          No PGP, no excuses.
-        </p>
-      </article>
-    </section>
+        <p>Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, always. Protocol rigor over novelty — functional aesthetics, ruthless clarity.</p>
+        <div class="linkbar">
+          <a class="btn" href="#projects">projects</a>
+          <a class="btn" href="https://github.com/DamBasement/DamBasement" target="_blank" rel="noopener noreferrer">github</a>
+          <a class="btn" href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank" rel="noopener noreferrer">linkedin</a>
+        </div>
+      </section>
 
-    <footer class="footer">DanteSec — Brutalist security pages · v1.0</footer>
-  </main>
+      <section id="projects" class="section container">
+        <h2>[projects/]</h2>
+        <div class="grid">
+          <article class="card accent-red" style="grid-column:span 12;">
+            <h3>DB war room</h3>
+            <p>Unified database pentest playbooks (Redis, Postgres, MySQL, MSSQL, Oracle, MongoDB). CLI-first, report-ready.</p>
+          </article>
+          <article class="card accent-blue" style="grid-column:span 12;">
+            <h3>BLEH!</h3>
+            <p>BLE sniff/replay lab and low-level HCI socket backend. Offensive lab tooling with brutalist interface.</p>
+          </article>
+          <article class="card accent-yellow" style="grid-column:span 12;">
+            <h3>Privacy-first</h3>
+            <p>Research & contributions in privacy tech. Threat models for user safety and communication resilience.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>[contact.sh]</h2>
+        <div class="grid">
+          <article class="card accent-blue" style="grid-column:span 8;">
+            <h3>Ping</h3>
+            <p>Email/DM via LinkedIn. No contact forms, no trackers.</p>
+          </article>
+          <article class="card accent-red" style="grid-column:span 4;display:flex;align-items:center;justify-content:center">
+            <div style="display:flex;gap:12px;align-items:center">
+              <span class="dot r"></span>
+              <span class="dot b"></span>
+              <span class="dot y"></span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container foot">
+        <small>© DanteSec — Bauhaus edition · v1.0</small>
+        <div class="mark">
+          <span class="dot r" title="red"></span>
+          <span class="dot b" title="blue"></span>
+          <span class="dot y" title="yellow"></span>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
