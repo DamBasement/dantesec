@@ -3,150 +3,143 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Damiano “Dante” Bassani · Bauhaus</title>
+  <title>Damiano Dante Bassani · Bauhaus Poster</title>
   <meta name="theme-color" content="#000000" />
   <style>
     :root{
-      --ink:#111;
-      --paper:#f7f7f5;
-      --red:#e01e37;
-      --blue:#1f6feb;
-      --yellow:#ffd200;
-      --black:#000;
-      --card:#ffffff;
+      --ink:#111; --paper:#f7f7f5; --card:#fff; --black:#000;
+      --red:#e01e37; --blue:#1f6feb; --yellow:#ffd200;
     }
-
     *,*:before,*:after{box-sizing:border-box}
-    html,body{height:100%;margin:0;padding:0;overflow-x:hidden}
-    body{background:var(--paper);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
-    img{max-width:100%;display:block}
+    html,body{height:100%;margin:0}
+    body{background:var(--paper);color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial}
     a{color:inherit}
 
-    .wrap{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}
-    .container{width:min(1080px, 92vw);margin:0 auto;padding-inline:clamp(18px,4.5vw,36px)}
+    /* ====== Poster layout ====== */
+    .wrap{min-height:100svh;display:grid;grid-template-columns: 320px 1fr;gap:0}
+    @media(max-width:900px){ .wrap{grid-template-columns:1fr} }
 
-    header{border-bottom:8px solid var(--black);background:var(--paper)}
-    .hero{display:flex;flex-direction:column;gap:28px;align-items:stretch;padding:48px 0;width:100%;max-width:100%}
+    /* Left rail (sticky) */
+    .rail{
+      position:sticky; top:0; align-self:start; height:100svh; display:flex; flex-direction:column;
+      border-right:8px solid var(--black);
+      padding:32px 24px 56px; gap:18px;
+      background:linear-gradient(0deg, transparent calc(100% - 24px), var(--black) 0);
+    }
+    @media(max-width:900px){
+      .rail{position:static; height:auto; border-right:none; border-bottom:8px solid var(--black); background:none}
+    }
 
-    .brand{display:flex;flex-direction:column;gap:12px;max-width:100%;background:var(--card);border:6px solid var(--black);padding:clamp(12px,2.5vw,18px)}
-    .brand h1{margin:0;font-weight:900;letter-spacing:0.5px;line-height:1.15;text-transform:uppercase;font-size:clamp(24px,4vw,42px);overflow-wrap:anywhere;word-break:break-word}
-.brand .fullname{display:inline}
-.brand .shortname{display:none}
-@media (max-width:820px){
-  .brand .fullname{display:none}
-  .brand .shortname{display:inline}
-}
-  .brand h1 .shortname{display:inline}
-}
-    .brand p{margin:0;max-width:66ch;font-size:clamp(14px,1.8vw,18px);line-height:1.6}
+    .brand h1{margin:0; text-transform:uppercase; font-weight:900; letter-spacing:.5px;
+      font-size: clamp(28px, 4vw, 48px); line-height:1.1; word-break:break-word}
+    .brand p{margin:6px 0 0; max-width:30ch; line-height:1.5}
 
-    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .badge{font-weight:800;border:3px solid var(--black);padding:4px 10px;text-transform:uppercase;letter-spacing:.5px}
-    .b-red{background:var(--red)}
-    .b-blue{background:var(--blue);color:#fff;border-color:#0b3b91}
-    .b-yellow{background:var(--yellow)}
+    .tabs{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
+    .tab{display:inline-block; border:4px solid var(--black); padding:8px 10px;
+      font-weight:900; text-transform:uppercase; letter-spacing:.5px; background:var(--card)}
+    .tab:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--black)}
 
-    .section{padding:56px 0;border-bottom:8px solid var(--black)}
+    .dots{margin-top:auto; display:flex; gap:8px; align-items:center}
+    .dot{width:14px; height:14px; border:3px solid var(--black); border-radius:50%}
+    .dot.r{background:var(--red)} .dot.b{background:var(--blue)} .dot.y{background:var(--yellow)}
+
+    /* Right content */
+    .content{min-width:0}
+    header.top{border-bottom:8px solid var(--black); padding:20px 24px}
+    .crumbs{font-weight:800; text-transform:uppercase; letter-spacing:.4px}
+
+    .container{width:min(1100px, 92vw); margin:0 auto; padding: clamp(18px, 4vw, 32px)}
+
+    .section{padding:32px 0; border-bottom:8px solid var(--black)}
     .section:last-of-type{border-bottom:none}
-    .section h2{margin:0 0 18px 0;font-size:clamp(16px,3vw,22px);text-transform:uppercase;letter-spacing:.5px}
-    .section p{margin:0;max-width:72ch;line-height:1.7}
+    .section h2{margin:0 0 16px 0; font-size:14px; text-transform:uppercase; letter-spacing:.5px}
+    .lead{margin:0 0 16px 0; max-width:72ch; line-height:1.7}
 
-    .grid{display:grid;gap:22px}
-    @media(min-width:720px){ .grid{grid-template-columns:repeat(12,1fr)} }
-    .card{background:var(--card);border:6px solid var(--black);padding:18px;min-height:120px;display:flex;flex-direction:column;gap:8px}
-    .card h3{margin:0;text-transform:uppercase;font-size:14px;letter-spacing:.4px}
+    .grid{display:grid; gap:18px}
+    @media(min-width:720px){ .grid{grid-template-columns:repeat(12, 1fr)} }
+
+    .card{background:var(--card); border:6px solid var(--black); padding:18px; display:flex; flex-direction:column; gap:6px; min-height:120px}
+    .card h3{margin:0; text-transform:uppercase; font-size:14px; letter-spacing:.4px}
     .card p{margin:0}
-
     .accent-red{border-left:18px solid var(--red)}
     .accent-blue{border-left:18px solid var(--blue)}
     .accent-yellow{border-left:18px solid var(--yellow)}
 
-    .linkbar{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .btn{display:inline-block;border:4px solid var(--black);padding:8px 12px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;background:var(--card)}
-    .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
+    footer{padding:20px 24px; border-top:8px solid var(--black); display:flex; justify-content:space-between; align-items:center}
+    small{font-weight:600}
 
-    footer{padding:20px 0;border-top:8px solid var(--black)}
-    .foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .mark{display:flex;gap:8px;align-items:center}
-    .dot{width:14px;height:14px;border:3px solid var(--black);border-radius:50%}
-    .dot.r{background:var(--red)}.dot.b{background:var(--blue)}.dot.y{background:var(--yellow)}
-
-    @media (prefers-reduced-motion: reduce){ .btn{transition:none} }
+    :root { scroll-behavior:smooth; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <div class="container hero">
-        <div class="brand">
-          <h1>Damiano "Dante" Bassani</h1>
-          <p>Security consultant · Purple & Zero Trust. Attacker‑informed, defender‑aligned. Brutalist craft, Bauhaus grid. No gradients. No fluff.</p>
-          <div class="badges">
-            <span class="badge b-red">Purple</span>
-            <span class="badge b-blue">Zero Trust</span>
-            <span class="badge b-yellow">Systems</span>
+    <!-- Sticky left rail -->
+    <aside class="rail">
+      <div class="brand">
+        <h1>Damiano Dante Bassani</h1>
+        <p>Security consultant · Purple & Zero Trust. Attacker-informed, defender-aligned. Brutalist craft, Bauhaus grid.</p>
+      </div>
+      <nav class="tabs">
+        <a class="tab" href="#about">about</a>
+        <a class="tab" href="#projects">projects</a>
+        <a class="tab" href="#contact">contact</a>
+        <a class="tab" href="https://github.com/DamBasement/DamBasement" target="_blank" rel="noopener">github</a>
+        <a class="tab" href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank" rel="noopener">linkedin</a>
+      </nav>
+      <div class="dots" aria-hidden="true">
+        <span class="dot r"></span><span class="dot b"></span><span class="dot y"></span>
+      </div>
+    </aside>
+
+    <!-- Main content on the right -->
+    <main class="content">
+      <header class="top"><div class="crumbs">/ home</div></header>
+
+      <div class="container">
+        <section id="about" class="section">
+          <h2>[about.md]</h2>
+          <p class="lead">Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, always. Protocol rigor over novelty — functional aesthetics, ruthless clarity.</p>
+        </section>
+
+        <section id="projects" class="section">
+          <h2>[projects/]</h2>
+          <div class="grid">
+            <article class="card accent-red" style="grid-column:span 12;">
+              <h3>DB war room</h3>
+              <p>Unified database pentest playbooks (Redis, Postgres, MySQL, MSSQL, Oracle, MongoDB). CLI-first, report-ready.</p>
+            </article>
+            <article class="card accent-blue" style="grid-column:span 12;">
+              <h3>BLEH!</h3>
+              <p>BLE sniff/replay lab and low-level HCI socket backend. Offensive lab tooling with brutalist interface.</p>
+            </article>
+            <article class="card accent-yellow" style="grid-column:span 12;">
+              <h3>Privacy-first</h3>
+              <p>Research & contributions in privacy tech. Threat models for user safety and communication resilience.</p>
+            </article>
           </div>
-        </div>
+        </section>
+
+        <section id="contact" class="section">
+          <h2>[contact.sh]</h2>
+          <div class="grid">
+            <article class="card accent-blue" style="grid-column:span 8;">
+              <h3>Ping</h3>
+              <p>Email/DM via LinkedIn. No contact forms, no trackers.</p>
+            </article>
+            <article class="card accent-red" style="grid-column:span 4; display:flex; align-items:center; justify-content:center">
+              <div style="display:flex; gap:12px; align-items:center">
+                <span class="dot r"></span><span class="dot b"></span><span class="dot y"></span>
+              </div>
+            </article>
+          </div>
+        </section>
       </div>
-    </header>
 
-    <main>
-      <section class="section container">
-        <h2>[about.md]</h2>
-        <p>Resilience by design. Red teaming and systems security. Practical threat modeling. Zero Trust, always. Protocol rigor over novelty — functional aesthetics, ruthless clarity.</p>
-        <div class="linkbar">
-          <a class="btn" href="#projects">projects</a>
-          <a class="btn" href="https://github.com/DamBasement/DamBasement" target="_blank" rel="noopener noreferrer">github</a>
-          <a class="btn" href="https://www.linkedin.com/in/damiano-bassani-65965b266/" target="_blank" rel="noopener noreferrer">linkedin</a>
-        </div>
-      </section>
-
-      <section id="projects" class="section container">
-        <h2>[projects/]</h2>
-        <div class="grid">
-          <article class="card accent-red" style="grid-column:span 12;">
-            <h3>DB war room</h3>
-            <p>Unified database pentest playbooks (Redis, Postgres, MySQL, MSSQL, Oracle, MongoDB). CLI-first, report-ready.</p>
-          </article>
-          <article class="card accent-blue" style="grid-column:span 12;">
-            <h3>BLEH!</h3>
-            <p>BLE sniff/replay lab and low-level HCI socket backend. Offensive lab tooling with brutalist interface.</p>
-          </article>
-          <article class="card accent-yellow" style="grid-column:span 12;">
-            <h3>Privacy-first</h3>
-            <p>Research & contributions in privacy tech. Threat models for user safety and communication resilience.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section container">
-        <h2>[contact.sh]</h2>
-        <div class="grid">
-          <article class="card accent-blue" style="grid-column:span 8;">
-            <h3>Ping</h3>
-            <p>Email/DM via LinkedIn. No contact forms, no trackers.</p>
-          </article>
-          <article class="card accent-red" style="grid-column:span 4;display:flex;align-items:center;justify-content:center">
-            <div style="display:flex;gap:12px;align-items:center">
-              <span class="dot r"></span>
-              <span class="dot b"></span>
-              <span class="dot y"></span>
-            </div>
-          </article>
-        </div>
-      </section>
+      <footer>
+        <small>© Bauhaus poster · v1.1</small>
+        <div class="dots"><span class="dot r"></span><span class="dot b"></span><span class="dot y"></span></div>
+      </footer>
     </main>
-
-    <footer>
-      <div class="container foot">
-        <small>© Bauhaus edition · v1.0</small>
-        <div class="mark">
-          <span class="dot r" title="red"></span>
-          <span class="dot b" title="blue"></span>
-          <span class="dot y" title="yellow"></span>
-        </div>
-      </div>
-    </footer>
   </div>
 </body>
 </html>
