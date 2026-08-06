@@ -1,7 +1,7 @@
 # 🏴 DanteSec
 
 <div align="center">
-  <img src="[https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWV4ZWMzcDJicndiMHNicnV4OGQ5eWFmNGt2bW42Y3dxc3gwdXJhNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rrALBD1LMN5wqxYM5o/giphy.gif](https://giphy.com/gifs/highfivesdigital-cowboy-oz-murder-J2gyk5lYQ4Hx0VoTXM)" width="600"/>
+<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWdlY3phamF4eG5icWV0Z3hqaGN2ZmNuYnl5eThpeGc2ZWpidWhwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/J2gyk5lYQ4Hx0VoTXM/giphy.gif" width="600"/>
 </div>  
 
 ---
